@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:HappyBudget"
+             x:Class="HappyBudget.Views.Categories.CategoriesPage"
+             Title="Categories">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Primary"
+                     Priority="0"
+                     Command="{Binding NewCategoryCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource  Color="White"
+                                  FontFamily="{StaticResource Icons}"
+                                  Glyph="{x:Static local:IconFont.Plus}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding RefreshCategoriesCommand}">
+
+            <CollectionView SelectionMode="Single" x:Name="CategoriesCollectionView"
+                            ItemsSource="{Binding Categories}"
+                            
+                            SelectedItem="{Binding SelectedCategory}"
+                            SelectionChangedCommand="{Binding SelectCategoryCommand}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems SwipeBehaviorOnInvoked="Close">
+                                        <SwipeItem Text="Delete" 
+                                                   BackgroundColor="Red"
+                                                   Command="{Binding Source={x:Reference CategoriesCollectionView}, Path=BindingContext.DeleteCategoryCommand}"
+                                                   CommandParameter="{Binding}">
+                                            <SwipeItem.IconImageSource>
+                                                <FontImageSource Color="White"
+                                                     FontFamily="{StaticResource Icons}"
+                                                     Glyph="{x:Static local:IconFont.Trash}"/>
+                                            </SwipeItem.IconImageSource>
+                                        </SwipeItem>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+
+                                <Frame Padding="13"
+                                       BackgroundColor="White"
+                                       HasShadow="True">
+                                    <Grid ColumnDefinitions="Auto,Auto">
+                                        <Image Grid.Column="1" 
+                                               HorizontalOptions="Center"
+                                               WidthRequest="50"
+                                               HeightRequest="50"
+                                               Source="{Binding Image}"
+                                               BackgroundColor="{Binding Color}">
+                                            <Image.Clip>
+                                                <EllipseGeometry Center="25,25"
+                                                                 RadiusX="25"
+                                                                 RadiusY="25"/>
+                                            </Image.Clip>
+                                        </Image>
+                                        <Label Grid.Column="2"
+                                               VerticalTextAlignment="Center"
+                                               TextColor="Black"
+                                               FontAttributes="Bold"
+                                               Margin="7,0,0,0"
+                                               FontSize="16"
+                                               Text="{Binding Name}"/>
+                                    </Grid>
+                                </Frame>
+                            </SwipeView>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </RefreshView>
+    </ContentPage.Content>
+
+</ContentPage>

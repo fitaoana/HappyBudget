@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:HappyBudget"
+             xmlns:converters="clr-namespace:HappyBudget.Converters"
+             x:Class="HappyBudget.Views.Accounts.NewAccountPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ColorFromStringConverter x:Key="ColorFromStringConverter"/>
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <!--<ContentPage.ToolbarItems>
+        <ToolbarItem Order="Primary"
+                     Priority="0"
+                     Command="{Binding DeleteAccountCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource  Color="White"
+                                  FontFamily="{StaticResource Icons}"
+                                  Glyph="{x:Static local:IconFont.Trash}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>-->
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Name"
+                   Padding="10,16,10,0"/>
+            <Entry Text="{Binding AccountName}"
+                   Margin="16,0,16,0"/>
+            
+            <Label Text="Account Type"
+                   Padding="10,10,10,0"/>
+
+            <!--<CollectionView ItemsLayout="HorizontalList"
+                            SelectionMode="Single"
+                            HeightRequest="100"
+                            ItemsSource="{Binding AccountTypes}"
+                            SelectedItem="{Binding SelectedAccountType}"
+                            ItemTemplate="{StaticResource AccountTypeCell}">
+            </CollectionView>-->
+
+          
+            
+            <RadioButton Content="Card"
+                         IsChecked="{Binding IsChecked}"
+                         Margin="16,0,0,0"/>
+            <RadioButton Content="Cash"
+                         IsChecked="{Binding IsChecked, Converter={StaticResource InverseBoolConverter}, Mode=OneWay}"
+                         Margin="16,0,0,0"/>
+
+            <Label Text="Balance"
+                   Padding="16,10,16,0"/>
+            <Entry Keyboard="Numeric"
+                   Margin="16,0,16,0"
+                   Text="{Binding AccountBalance}"/>
+
+            
+            <Label Text="Color"
+                   Padding="16,10,16,0"/>
+            <Grid Margin="16,0,16,0"
+                  ColumnDefinitions="2*,100"
+                  HorizontalOptions="FillAndExpand">
+                <Frame CornerRadius="30"
+                       BorderColor="LightGray"
+                       HasShadow="True"
+                       Margin="10,5,10,5"
+                       HeightRequest="10"
+                       WidthRequest="10"
+                       Grid.Column="0"
+                       BackgroundColor="{Binding AccountColor, Converter={StaticResource ColorFromStringConverter}}"/>
+  
+                <Button Margin="0,10,0,0"
+                        TextColor="Black"
+                        HorizontalOptions="CenterAndExpand"
+                        CornerRadius="30"
+                        Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        Command="{Binding ShowColorsCommand}">
+                    <Button.ImageSource>
+                        <FontImageSource Color="Black"
+                                         FontFamily="{StaticResource Icons}"
+                                         Glyph="{x:Static local:IconFont.Palette}"/>
+                    </Button.ImageSource>
+                </Button>
+            </Grid>
+
+
+            
+            <Button TextColor="White"
+                    Margin="20"
+                    WidthRequest="200"
+                    CornerRadius="30"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Save"
+                    BackgroundColor="{StaticResource PrimaryColor}"
+                    Command="{Binding AddAccountCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>

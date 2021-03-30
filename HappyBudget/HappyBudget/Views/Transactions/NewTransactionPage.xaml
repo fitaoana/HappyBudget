@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:HappyBudget.Converters"
+             xmlns:local="clr-namespace:HappyBudget"
+             x:Class="HappyBudget.Views.Transactions.NewTransactionPage"
+             Shell.TabBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Transaction Type"
+                   Padding="10,16,10,0"/>
+            <RadioButton Content="Income"
+                         IsChecked="{Binding IsChecked}"
+                         Margin="16,0,0,0"/>
+            <RadioButton Content="Expense"
+                         IsChecked="{Binding IsChecked, Converter={StaticResource InverseBoolConverter}, Mode=OneWay}"
+                         Margin="16,0,0,0"/>
+            
+            <Label Text="Account"
+                   Padding="16,10,16,0"/>
+           
+                <Frame 
+                    Margin="16,0,16,0"
+                      
+                       HasShadow="True"
+                       BorderColor="LightGray"
+                       VerticalOptions="Center"
+                       Grid.Column="0"
+                       CornerRadius="30"
+                       >
+                    <Grid ColumnDefinitions="2*,100"
+                          HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding TransactionAccountName}" VerticalOptions="CenterAndExpand"
+                                               HorizontalOptions="CenterAndExpand"
+                                               HorizontalTextAlignment="Center"
+                                               FontSize="16"
+                                               TextColor="Black"/>
+                    <Button Margin="0,10,0,0" Grid.Column="1"
+                      
+                        HorizontalOptions="End"
+                        HeightRequest="20"
+                        WidthRequest="30"
+                          Scale="1"
+                        BackgroundColor="Transparent"
+                        Command="{Binding ShowAccountsCommand}">
+                        <Button.ImageSource>
+                            <FontImageSource Color="Black"  
+                                         FontFamily="{StaticResource Icons}"
+                                         Glyph="{x:Static local:IconFont.AngleDown}"/>
+                        </Button.ImageSource>
+                    </Button>
+                    </Grid>
+                </Frame>
+
+            <Label Text="Category"
+                   Padding="16,10,16,0"/>
+            <Frame 
+                    Margin="16,0,16,0"
+                      
+                       HasShadow="True"
+                       BorderColor="LightGray"
+                       VerticalOptions="Center"
+                       Grid.Column="0"
+                       CornerRadius="30"
+                       >
+                <Grid ColumnDefinitions="2*,100"
+                          HorizontalOptions="FillAndExpand">
+                    <Label Text="{Binding TransactionCategoryName}" VerticalOptions="CenterAndExpand"
+                                               HorizontalOptions="CenterAndExpand"
+                                               HorizontalTextAlignment="Center"
+                                               FontSize="16"
+                                               TextColor="Black"/>
+                    <Button Margin="0,10,0,0" Grid.Column="1"
+                      
+                        HorizontalOptions="End"
+                        HeightRequest="20"
+                        WidthRequest="30"
+                          Scale="1"
+                        BackgroundColor="Transparent"
+                        Command="{Binding ShowCategoriesCommand}">
+                        <Button.ImageSource>
+                            <FontImageSource Color="Black"  
+                                         FontFamily="{StaticResource Icons}"
+                                         Glyph="{x:Static local:IconFont.AngleDown}"/>
+                        </Button.ImageSource>
+                    </Button>
+                </Grid>
+            </Frame>
+
+            <Label Text="Amount"
+                   Margin="16,10,16,0"/>
+            <Entry Text="{Binding TransactionAmount}"
+                   Keyboard="Numeric"
+                   Margin="16,0,16,0"/>
+           
+            <Label Text="Transaction Date"
+                   Padding="16,10,16,0"/>
+            <DatePicker Margin="16,0,16,0"
+                        Date="{Binding TransactionDate}"/>
+
+            <Button TextColor="White"
+                    Margin="20"
+                    WidthRequest="200"
+                    CornerRadius="30"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Save"
+                    BackgroundColor="{StaticResource PrimaryColor}"
+                    Command="{Binding AddTransactionCommand}"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

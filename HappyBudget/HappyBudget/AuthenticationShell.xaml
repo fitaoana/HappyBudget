@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:authentication="clr-namespace:HappyBudget.Views.Authentication"
+             x:Class="HappyBudget.AuthenticationShell">
+
+    <ShellContent Route="OnboardingViewModel"
+                  ContentTemplate="{DataTemplate authentication:OnboardingPage}"/>
+    <ShellContent Route="LoginViewModel"
+                  ContentTemplate="{DataTemplate authentication:LoginPage}"/>
+    <ShellContent Route="RegisterViewModel"
+                  ContentTemplate="{DataTemplate authentication:RegisterPage}"/>
+
+</Shell>

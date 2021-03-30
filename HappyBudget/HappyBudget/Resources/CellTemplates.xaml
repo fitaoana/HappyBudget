@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:local="clr-namespace:HappyBudget">
+
+    <DataTemplate x:Key="AccountTypeCell">
+        <StackLayout VerticalOptions="Center">
+            <Frame Margin="10,5,10,5"
+                   BorderColor="Black"
+                   VerticalOptions="Center"
+                   HeightRequest="40"
+                   CornerRadius="30"
+                   BackgroundColor="White">
+                <Grid ColumnDefinitions="Auto,Auto">
+                    <Image Grid.Column="0"
+                           Aspect="AspectFit"
+                           WidthRequest="40"
+                           HeightRequest="40"
+                           Source="{Binding AccountTypeImage}"/>
+                    <Label Grid.Column="1"
+                           WidthRequest="80"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="Black"
+                           Text="{Binding AccountTypeName}"/>
+                </Grid>
+            </Frame>
+        </StackLayout>
+    </DataTemplate>
+
+    <DataTemplate x:Key="AccountCell">
+        <StackLayout>
+            <SwipeView>
+                <SwipeView.RightItems>
+                    <SwipeItem Text="Delete" 
+                               BackgroundColor="White"
+                               Command="{Binding Source={x:Reference AccountsCollectionView}, Path=BindingContext.DeleteAccountCommand}"
+                               CommandParameter="{Binding}">
+                        <SwipeItem.IconImageSource>
+                            <FontImageSource Color="Black"
+                                             FontFamily="{StaticResource Icons}"
+                                             Glyph="{x:Static local:IconFont.Trash}"/>
+                        </SwipeItem.IconImageSource>
+                    </SwipeItem>
+                </SwipeView.RightItems>
+
+                <Frame
+                       Padding="13"
+                       BackgroundColor="White"
+                       HasShadow="True">
+                    <Grid ColumnDefinitions="Auto,Auto,Auto">
+                        <Image Grid.Column="1" 
+                               HorizontalOptions="Center"
+                               WidthRequest="50"
+                               HeightRequest="50"
+                               Source="{Binding Image}"
+                               BackgroundColor="{Binding Color}">
+                            <Image.Clip>
+                                <EllipseGeometry Center="25,25"
+                                                 RadiusX="25"
+                                                 RadiusY="25"/>      
+                            </Image.Clip>
+                        </Image>
+                        <Label Grid.Column="2"
+                               TextColor="Black"
+                               FontAttributes="Bold"
+                               Margin="7,0,0,0"
+                               Text="{Binding Name}"/>
+                        <Label Grid.Column="2"
+                               TextColor="Black"
+                               Margin="7,25,0,0"
+                               Text="{Binding Type}"/>
+                        <Label Grid.Column="3"
+                               TextColor="Black"
+                               FontAttributes="Bold"
+                               HorizontalOptions="End"
+                               Padding="0,0,10,0"
+                               Text="{Binding Balance}"/>
+                    </Grid>
+                </Frame>
+            </SwipeView>
+        </StackLayout>
+        
+    </DataTemplate>
+
+</ResourceDictionary>

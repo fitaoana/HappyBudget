@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:view="clr-namespace:HappyBudget.Views"
+       xmlns:accounts="clr-namespace:HappyBudget.Views.Accounts"
+       xmlns:transactions="clr-namespace:HappyBudget.Views.Transactions"
+       xmlns:categories="clr-namespace:HappyBudget.Views.Categories"
+       xmlns:local="clr-namespace:HappyBudget"
+       x:Class="HappyBudget.AppShell"
+       Title="HappyBudget">
+
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Title="Statistics"
+                      ContentTemplate="{DataTemplate view:StatisticsPage}">
+            <ShellContent.FlyoutIcon>
+                <FontImageSource FontFamily="{StaticResource Icons}"
+                                 Glyph="{x:Static local:IconFont.ChartPie}"
+                                 Color="Black"/>
+            </ShellContent.FlyoutIcon>
+        </ShellContent>
+    </FlyoutItem>
+
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Title="Transactions"
+                      ContentTemplate="{DataTemplate transactions:TransactionsPage}">
+            <ShellContent.FlyoutIcon>
+                <FontImageSource FontFamily="{StaticResource Icons}"
+                                 Glyph="{x:Static local:IconFont.Stream}"
+                                 Color="Black"/>
+            </ShellContent.FlyoutIcon>
+        </ShellContent>
+    </FlyoutItem>
+
+    <!--<FlyoutItem FlyoutDisplayOptions="AsSingleItem"
+                Title="Transactions">
+        <FlyoutItem.Icon>
+            <FontImageSource FontFamily="{StaticResource Icons}"
+                             Glyph="{x:Static local:IconFont.Stream}"
+                             Color="Black"/>
+        </FlyoutItem.Icon>
+        <Tab Title="Transactions">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{StaticResource Icons}"
+                                 Glyph="{x:Static local:IconFont.ThList}"/>
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate transactions:TransactionsPage}"/>
+        </Tab>
+        <Tab Title="Expenses">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{StaticResource Icons}"
+                                 Glyph="{x:Static local:IconFont.ArrowCircleUp}"/>
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate transactions:ExpensesPage}"/>
+        </Tab>
+        <Tab Title="Incomes">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{StaticResource Icons}"
+                                 Glyph="{x:Static local:IconFont.ArrowCircleDown}"/>
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate transactions:IncomesPage}"/>
+        </Tab>
+    </FlyoutItem>-->
+    
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Title="Accounts"
+                      ContentTemplate="{DataTemplate accounts:AccountsPage}">
+            <ShellContent.FlyoutIcon>
+                <FontImageSource FontFamily="{StaticResource Icons}"
+                                 Glyph="{x:Static local:IconFont.Wallet}"
+                                 Color="Black" />
+            </ShellContent.FlyoutIcon>
+        </ShellContent>
+    </FlyoutItem>
+
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Title="Categories"
+                      ContentTemplate="{DataTemplate categories:CategoriesPage}">
+            <ShellContent.FlyoutIcon>
+                <FontImageSource FontFamily="{StaticResource Icons}"
+                                 Glyph="{x:Static local:IconFont.ProjectDiagram}"
+                                 Color="Black" />
+            </ShellContent.FlyoutIcon>
+        </ShellContent>
+    </FlyoutItem>
+
+    <MenuItem Text="Logout">
+        <MenuItem.IconImageSource>
+            <FontImageSource FontFamily="{StaticResource Icons}"
+                             Glyph="{x:Static local:IconFont.SignOutAlt}"
+                             Color="Black"/>
+        </MenuItem.IconImageSource>
+    </MenuItem>
+
+</Shell>

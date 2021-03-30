@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HappyBudget.Views.Authentication.OnboardingPage"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <Button Grid.Row="0"
+                    HorizontalOptions="EndAndExpand"
+                    Margin="0,40,20,0"
+                    FontAttributes="Bold" 
+                   
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource PrimaryColor}"
+                    Text="Skip"
+                    Command="{Binding SkipCommand}"/>
+            
+            <CarouselView x:Name="onBoardingCarousel"
+                          Grid.Row="1"
+                          ItemsSource="{Binding OnboardingItems}" 
+                          HorizontalScrollBarVisibility="Never"
+                          IndicatorView="OnboardingSteps"
+                          VerticalOptions="Center">
+                
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView>
+                            <FlexLayout Direction="Column"
+                                     JustifyContent="SpaceEvenly">
+                                <Label Text="{Binding Title}"
+                                       FontAttributes="Bold"
+                                       FontSize="Title" />
+                                <Image Source="{Binding Image}" Aspect="AspectFill" WidthRequest="250" 
+                                       FlexLayout.AlignSelf="Center"/>
+                                <Label Text="{Binding Content}"
+                                       FontSize="Body"/>
+                            </FlexLayout>
+                        </ContentView>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            
+            <IndicatorView x:Name="OnboardingSteps"
+                    Grid.Row="2"
+                    IndicatorsShape="Circle"
+                           IndicatorSize="10"
+                    IndicatorColor="{StaticResource PrimaryColor}"
+                    SelectedIndicatorColor="Gray"
+                           VerticalOptions="End"
+                            Margin="0,0,0,40"
+                    HorizontalOptions="Center"/>
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>
