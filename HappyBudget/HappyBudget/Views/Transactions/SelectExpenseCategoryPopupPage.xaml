@@ -28,7 +28,7 @@
               VerticalOptions="Center">
             <ScrollView Margin="5,5,5,5" 
                         VerticalScrollBarVisibility="Never">
-                <StackLayout HeightRequest="550"
+                <StackLayout HeightRequest="335"
                              WidthRequest="350"
                              Orientation="Vertical">
                     <CollectionView Margin="5,0"
@@ -39,7 +39,7 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate >
                                 <StackLayout VerticalOptions="Center">
-                                    <Frame Margin="8,2,8,2"
+                                    <Frame Margin="2"
                                             HasShadow="True"
                                            BorderColor="LightGray"
                                            VerticalOptions="Center"

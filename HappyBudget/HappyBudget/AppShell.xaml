@@ -5,13 +5,14 @@
        xmlns:accounts="clr-namespace:HappyBudget.Views.Accounts"
        xmlns:transactions="clr-namespace:HappyBudget.Views.Transactions"
        xmlns:categories="clr-namespace:HappyBudget.Views.Categories"
+       xmlns:statistics="clr-namespace:HappyBudget.Views.Statistics"
        xmlns:local="clr-namespace:HappyBudget"
        x:Class="HappyBudget.AppShell"
        Title="HappyBudget">
 
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent Title="Statistics"
-                      ContentTemplate="{DataTemplate view:StatisticsPage}">
+                      ContentTemplate="{DataTemplate statistics:StatisticsPage}">
             <ShellContent.FlyoutIcon>
                 <FontImageSource FontFamily="{StaticResource Icons}"
                                  Glyph="{x:Static local:IconFont.ChartPie}"

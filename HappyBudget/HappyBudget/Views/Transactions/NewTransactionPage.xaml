@@ -4,6 +4,7 @@
              xmlns:converters="clr-namespace:HappyBudget.Converters"
              xmlns:local="clr-namespace:HappyBudget"
              x:Class="HappyBudget.Views.Transactions.NewTransactionPage"
+              xmlns:pancakes="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              Shell.TabBarIsVisible="False">
 
     <ContentPage.Resources>
@@ -13,34 +14,69 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Transaction Type"
-                   Padding="10,16,10,0"/>
+                   FontSize="Subtitle"
+                   Margin="10,20,10,0"/>
             <RadioButton Content="Income"
                          IsChecked="{Binding IsChecked}"
-                         Margin="16,0,0,0"/>
+                         Margin="20,0"/>
             <RadioButton Content="Expense"
                          IsChecked="{Binding IsChecked, Converter={StaticResource InverseBoolConverter}, Mode=OneWay}"
-                         Margin="16,0,0,0"/>
+                         Margin="20,0"/>
             
             <Label Text="Account"
-                   Padding="16,10,16,0"/>
-           
-                <Frame 
-                    Margin="16,0,16,0"
+                   FontSize="Subtitle"
+                   Margin="10,20,10,0"/>
+            
+            <Grid Margin="20,0"
+                  ColumnDefinitions="*,*"
+                  HorizontalOptions="CenterAndExpand">
+                <pancakes:PancakeView CornerRadius="30"
+                       
+                       Shadow="{pancakes:ShadowMarkup Offset='5,5'}"
                       
-                       HasShadow="True"
-                       BorderColor="LightGray"
-                       VerticalOptions="Center"
+                       
+                       Grid.Column="0"
+                       BackgroundColor="White">
+
+                    <Label Text="{Binding TransactionAccountName}"
+                           TextColor="Black"
+                           VerticalTextAlignment="Center"
+                           FontSize="16"
+                           HorizontalTextAlignment="Center"/>
+
+                </pancakes:PancakeView>
+                <Button 
+                        TextColor="Black"
+                        Text="Choose account"
+                        HorizontalOptions="CenterAndExpand"
+                        CornerRadius="30"
+                        Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        Command="{Binding ShowAccountsCommand}">
+                    <!--<Button.ImageSource>
+                        <FontImageSource Color="Black"
+                                         FontFamily="{StaticResource Icons}"
+                                         Glyph="{x:Static local:IconFont.Palette}"/>
+                    </Button.ImageSource>-->
+                </Button>
+            </Grid>
+            <!--<pancakes:PancakeView 
+                    Margin="20,0"
+                      BackgroundColor="White"
+                       Shadow="{pancakes:ShadowMarkup Offset='5,5'}"
+                       VerticalOptions="FillAndExpand"
                        Grid.Column="0"
                        CornerRadius="30"
                        >
                     <Grid ColumnDefinitions="2*,100"
-                          HorizontalOptions="FillAndExpand">
+                          HorizontalOptions="Center"
+                          >
                         <Label Text="{Binding TransactionAccountName}" VerticalOptions="CenterAndExpand"
                                                HorizontalOptions="CenterAndExpand"
                                                HorizontalTextAlignment="Center"
                                                FontSize="16"
                                                TextColor="Black"/>
-                    <Button Margin="0,10,0,0" Grid.Column="1"
+                    <Button  Grid.Column="1"
                       
                         HorizontalOptions="End"
                         HeightRequest="20"
@@ -55,12 +91,46 @@
                         </Button.ImageSource>
                     </Button>
                     </Grid>
-                </Frame>
+                </pancakes:PancakeView>-->
 
             <Label Text="Category"
-                   Padding="16,10,16,0"/>
-            <Frame 
-                    Margin="16,0,16,0"
+                   FontSize="Subtitle"
+                   Margin="10,20,10,0"/>
+            <Grid Margin="20,0"
+                  ColumnDefinitions="*,*"
+                  HorizontalOptions="CenterAndExpand">
+                <pancakes:PancakeView CornerRadius="30"
+                       
+                       Shadow="{pancakes:ShadowMarkup Offset='5,5'}"
+                      
+                       
+                       Grid.Column="0"
+                       BackgroundColor="White">
+
+                    <Label Text="{Binding TransactionCategoryName}"
+                           TextColor="Black"
+                           VerticalTextAlignment="Center"
+                           FontSize="16"
+                           HorizontalTextAlignment="Center"/>
+
+                </pancakes:PancakeView>
+                <Button 
+                        TextColor="Black"
+                        Text="Choose category"
+                        HorizontalOptions="CenterAndExpand"
+                        CornerRadius="30"
+                        Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        Command="{Binding ShowCategoriesCommand}">
+                    <!--<Button.ImageSource>
+                        <FontImageSource Color="Black"
+                                         FontFamily="{StaticResource Icons}"
+                                         Glyph="{x:Static local:IconFont.Palette}"/>
+                    </Button.ImageSource>-->
+                </Button>
+            </Grid>
+            <!--<Frame 
+                    Margin="20,0"
                       
                        HasShadow="True"
                        BorderColor="LightGray"
@@ -90,17 +160,19 @@
                         </Button.ImageSource>
                     </Button>
                 </Grid>
-            </Frame>
+            </Frame>-->
 
             <Label Text="Amount"
-                   Margin="16,10,16,0"/>
+                   FontSize="Subtitle"
+                   Margin="10,20,10,0"/>
             <Entry Text="{Binding TransactionAmount}"
                    Keyboard="Numeric"
-                   Margin="16,0,16,0"/>
+                   Margin="20,0"/>
            
             <Label Text="Transaction Date"
-                   Padding="16,10,16,0"/>
-            <DatePicker Margin="16,0,16,0"
+                   FontSize="Subtitle"
+                   Margin="10,20,10,0"/>
+            <DatePicker Margin="20,0"
                         Date="{Binding TransactionDate}"/>
 
             <Button TextColor="White"

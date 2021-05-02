@@ -28,7 +28,7 @@
               VerticalOptions="Center">
             <ScrollView Margin="5,5,5,5" 
                         VerticalScrollBarVisibility="Never">
-                <StackLayout HeightRequest="400"
+                <StackLayout HeightRequest="355"
                              WidthRequest="350"
                              Orientation="Vertical">
                     <CollectionView Margin="5,0"
@@ -53,7 +53,7 @@
 
 
                                     
-                                            <Image Margin="0,4,0,0" Scale="1"
+                                            <Image Margin="0,4" Scale="1"
                                                HorizontalOptions="Center"
                                                WidthRequest="50"
                                                HeightRequest="50"

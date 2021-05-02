@@ -25,7 +25,7 @@ namespace HappyBudget.Models
 
         public static List<OnboardingItem> GetOnboardingItems()
         {
-            return new List<OnboardingItem> ///ADAUGARE IN DB APOI GET IN FUNCTIE DE TYPE 2 LISTE SI IN NEW TRANSACTION IF 
+            return new List<OnboardingItem>
             {
                 new OnboardingItem("Title1", "xamarin_logo.png", "Content1"),
                 new OnboardingItem("Title2", "xamarin_logo.png", "Content2"),

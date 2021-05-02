@@ -13,7 +13,11 @@ namespace HappyBudget.Models
         public string Type { get; set; }
         public string Image { get; set; }
         public string Color { get; set; }
+
+        [Ignore]
         public string Account { get; set; }
+
+        [Ignore]
         public string Category { get; set; }
 
         [ForeignKey(typeof(Account))]

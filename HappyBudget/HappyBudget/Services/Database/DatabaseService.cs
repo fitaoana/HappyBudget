@@ -11,7 +11,6 @@ namespace HappyBudget.Services.Database
 {
     public class DatabaseService<T> : IDatabaseService<T> where T : IEntity, new()
     {
-        //The initialization of the database is created when it's first accessed
         readonly Lazy<SQLiteAsyncConnection> connection = new Lazy<SQLiteAsyncConnection>(() =>
         {
             return new SQLiteAsyncConnection(DatabaseConstants.DatabasePath, DatabaseConstants.Flags);

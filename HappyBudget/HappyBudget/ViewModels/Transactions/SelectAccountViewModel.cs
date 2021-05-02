@@ -21,8 +21,13 @@ namespace HappyBudget.ViewModels.Transactions
         public ObservableCollection<Account> Accounts
         {
             get { return _accounts; }
-            set { SetProperty(ref _accounts, value); }
+            set 
+            { 
+                SetProperty(ref _accounts, value);
+                
+            }
         }
+
 
         private Account _selectedAccount;
         public Account SelectedAccount

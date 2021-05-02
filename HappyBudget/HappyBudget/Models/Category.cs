@@ -13,6 +13,8 @@ namespace HappyBudget.Models
         public string Color { get; set; }
         public string Type { get; set; }
 
+        [Ignore]
+        public decimal Spendings { get; set; }
 
         [OneToMany]
         public List<Transaction> Transactions { get; set; }
@@ -33,7 +35,7 @@ namespace HappyBudget.Models
 
         public static List<Category> GetDefaultCategories()
         {
-            return new List<Category> ///ADAUGARE IN DB APOI GET IN FUNCTIE DE TYPE 2 LISTE SI IN NEW TRANSACTION IF 
+            return new List<Category> 
             {
                 new Category("Bar/Cafe", "bar_cafe.png", "#00CED1", "Expense"),
                 new Category("Groceries", "groceries.png", "#008080", "Expense"),

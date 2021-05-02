@@ -28,7 +28,7 @@
               VerticalOptions="Center">
             <ScrollView Margin="5,5,5,5" 
                         VerticalScrollBarVisibility="Never">
-                <StackLayout HeightRequest="400"
+                <StackLayout HeightRequest="355"
                              WidthRequest="350"
                              Orientation="Vertical">
                     <CollectionView Margin="5,0"
@@ -50,7 +50,7 @@
                                            CornerRadius="30"
                                            BackgroundColor="{Binding HexCode, Converter={StaticResource ColorFromStringConverter}}">-->
                                         <!--<ContentView BackgroundColor="{Binding HexCode, Converter={StaticResource ColorFromStringConverter}}"/>-->
-                                    <BoxView CornerRadius="180" Margin="0,4,0,0"  HorizontalOptions="Center" Scale="1"
+                                    <BoxView CornerRadius="180" Margin="0,4"  HorizontalOptions="Center" Scale="1"
                                                  BackgroundColor="{Binding HexCode, Converter={StaticResource ColorFromStringConverter}}"/>
                                     <!--</Frame>-->
                                 </StackLayout>

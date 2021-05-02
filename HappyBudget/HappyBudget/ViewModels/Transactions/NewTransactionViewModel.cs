@@ -19,8 +19,11 @@ namespace HappyBudget.ViewModels.Transactions
     [QueryProperty("Id", "id")]
     public class NewTransactionViewModel : BaseViewModel
     {
-        private IDatabaseService<Transaction> _databaseService;
+        private IDatabaseService<Transaction> _databaseServiceTransaction;
+        private IDatabaseService<Account> _databaseServiceAccount;
+        private IDatabaseService<Category> _databaseServiceCategory;
         private INavigationService _navigationService;
+        private IDialogService _dialogService;
 
         private Account _transactionAccount;
         public Account TransactionAccount
@@ -58,10 +61,14 @@ namespace HappyBudget.ViewModels.Transactions
             set { SetProperty(ref _transactionAmount, value); }
         }
 
-        public NewTransactionViewModel(IDatabaseService<Transaction> databaseService, INavigationService navigationService)
+        public NewTransactionViewModel(IDatabaseService<Transaction> databaseServiceTransaction, IDatabaseService<Account> databaseServiceAccount, IDatabaseService<Category> databaseServiceCategory, INavigationService navigationService, IDialogService dialogService)
         {
-            _databaseService = databaseService;
+            _databaseServiceTransaction = databaseServiceTransaction;
+            _databaseServiceAccount = databaseServiceAccount;
+            _databaseServiceCategory = databaseServiceCategory;
             _navigationService = navigationService;
+            _dialogService = dialogService;
+
             RecieveMessage();
         }
 
@@ -119,7 +126,7 @@ namespace HappyBudget.ViewModels.Transactions
         public ICommand ShowCategoriesCommand { get => new Command(() => ShowCategories()); }
         private async void ShowCategories()
         {
-            if(IsChecked == true)
+            if (IsChecked == true)
             {
                 await Shell.Current.Navigation.PushPopupAsync(new SelectIncomeCategoryPopupPage());
             }
@@ -127,18 +134,30 @@ namespace HappyBudget.ViewModels.Transactions
             {
                 await Shell.Current.Navigation.PushPopupAsync(new SelectExpenseCategoryPopupPage());
             }
-            
+
         }
 
-        public ICommand AddTransactionCommand { get => new Command(async () => await AddTransaction(), () => IsNotBusy); }
+        public ICommand AddTransactionCommand { get => new Command(async () => await AddTransaction()); }
         private async Task AddTransaction()
-        { 
+        {
 
-            //Salveaza in baza de date
+            if (TransactionAccount == null && TransactionCategory == null)
+            {
+                await _dialogService.DisplayAlert("Error", "Please select an account and a category!", "Ok");
+                return;
+            }
+            else if (TransactionAccount == null)
+            {
+                await _dialogService.DisplayAlert("Error", "Please select an account!", "OK");
+            }
+            else if (TransactionCategory == null)
+            {
+                await _dialogService.DisplayAlert("Error", "Please select a category!", "OK");
+            }
             IsBusy = true;
             await SaveTransaction();
 
-            await _navigationService.PopAsync(); //Navigheaza spre pagina anterioara
+            await _navigationService.PopAsync();
             IsBusy = false;
         }
 
@@ -146,6 +165,7 @@ namespace HappyBudget.ViewModels.Transactions
         {
             var transaction = new Transaction
             {
+                Id = string.IsNullOrEmpty(Id) ? 0 : int.Parse(Id),
                 Amount = TransactionAmount,
                 Date = TransactionDate,
                 Type = IsChecked == true ? AppConstants.IS_INCOME : AppConstants.IS_EXPENSE,
@@ -154,11 +174,11 @@ namespace HappyBudget.ViewModels.Transactions
                 Account = TransactionAccount.Name,
                 Category = TransactionCategoryName,
                 AccountId = TransactionAccount.Id,
-                CategoryId = TransactionCategory.Id,
-                Id = string.IsNullOrEmpty(Id) ? 0 : int.Parse(Id),
+                CategoryId = TransactionCategory.Id
+
                 //UserEmail = user
             };
-            await _databaseService.SaveAsync(transaction);
+            await _databaseServiceTransaction.SaveAsync(transaction);
         }
 
         public async override Task InitializeAsync(object parameter)
@@ -170,12 +190,15 @@ namespace HappyBudget.ViewModels.Transactions
                 return;
             }
 
-            var selectedTransaction = await _databaseService.GetById(transactionId);
+            var selectedTransaction = await _databaseServiceTransaction.GetById(transactionId);
             IsChecked = selectedTransaction.Type == AppConstants.IS_INCOME;
-            TransactionAccountName = selectedTransaction.Account;
-            TransactionCategoryName = selectedTransaction.Category;
+            TransactionAccount = await _databaseServiceAccount.GetById(selectedTransaction.AccountId);
+            TransactionCategory = await _databaseServiceCategory.GetById(selectedTransaction.CategoryId);
+            TransactionAccountName = TransactionAccount.Name;
+            TransactionCategoryName = TransactionCategory.Name;
             TransactionDate = selectedTransaction.Date;
             TransactionAmount = selectedTransaction.Amount;
         }
     }
 }
+ 

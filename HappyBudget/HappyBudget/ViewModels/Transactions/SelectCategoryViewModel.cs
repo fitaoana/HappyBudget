@@ -41,10 +41,14 @@ namespace HappyBudget.ViewModels.Transactions
         public ObservableCollection<Category> Categories
         {
             get => _categories;
-            set { SetProperty(ref _categories, value); }
+            set 
+            { 
+                SetProperty(ref _categories, value);
+               
+            }
         }
 
-
+        
         public override async Task InitializeAsync(object parameter)
         {
             _filter = parameter.ToString();

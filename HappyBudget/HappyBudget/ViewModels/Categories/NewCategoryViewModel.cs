@@ -75,6 +75,7 @@ namespace HappyBudget.ViewModels.Categories
             if (string.IsNullOrWhiteSpace(Id) || !int.TryParse(Id, out int categoryId))
             {
                 IsChecked = true;
+                CategoryColor = "#FFFFFF";
                 return;
             }
 
@@ -91,11 +92,25 @@ namespace HappyBudget.ViewModels.Categories
         public ICommand AddCategoryCommand { get => new Command(async () => await AddCategory(), () => IsNotBusy); }
         private async Task AddCategory()
         {
-            //Salveaza in baza de date
+            if (CategoryColor.Equals("#FFFFFF") && CategoryImage == null)
+            {
+                await _dialogService.DisplayAlert("Error", "Please select a color and an image!", "Ok");
+                return;
+            }
+            else if (CategoryImage == null)
+            {
+                await _dialogService.DisplayAlert("Error", "Please select an image!", "OK");
+                return;
+            }
+            else if (CategoryColor.Equals("#FFFFFF"))
+            {
+                await _dialogService.DisplayAlert("Error", "Please select a color!", "OK");
+                return;
+            }
             IsBusy = true;
             await SaveCategory();
 
-            await _navigationService.PopAsync(); //Navigheaza spre pagina anterioara
+            await _navigationService.PopAsync(); 
             IsBusy = false;
         }
 

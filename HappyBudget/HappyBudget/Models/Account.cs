@@ -18,6 +18,7 @@ namespace HappyBudget.Models
         public string Type { get; set; }
         public string Color { get; set; }
 
+       
         [OneToMany]
         public List<Transaction> Transactions { get; set; }
 
@@ -40,7 +41,7 @@ namespace HappyBudget.Models
 
         public static List<Account> GetDefaultAccounts()
         {
-            return new List<Account> ///ADAUGARE IN DB APOI GET IN FUNCTIE DE TYPE 2 LISTE SI IN NEW TRANSACTION IF 
+            return new List<Account>
             {
                 new Account("Bank", 0, "card.png", "Card", "#DEB887"),
                 new Account("Wallet", 0, "cash.png", "Cash", "#191970"),

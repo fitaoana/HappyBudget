@@ -59,7 +59,11 @@ namespace HappyBudget.ViewModels.Accounts
         public string AccountColor
         {
             get { return _accountColor; }
-            set { SetProperty(ref _accountColor, value); }
+            set 
+            { 
+                SetProperty(ref _accountColor, value);
+           
+            }
         }
 
         public NewAccountViewModel(IDatabaseService<Account> databaseService, INavigationService navigationService, IDialogService dialogService)
@@ -76,6 +80,7 @@ namespace HappyBudget.ViewModels.Accounts
             if (string.IsNullOrWhiteSpace(Id) || !int.TryParse(Id, out int accountId))
             {
                 IsChecked = true;
+                AccountColor = "#FFFFFF";
                 return;
             }
 
@@ -92,11 +97,15 @@ namespace HappyBudget.ViewModels.Accounts
         public ICommand AddAccountCommand { get => new Command(async () => await AddAccount(), () => IsNotBusy); }
         private async Task AddAccount()
         {
-            //Salveaza in baza de date
+            if (AccountColor.Equals("#FFFFFF"))
+            {
+                await _dialogService.DisplayAlert("Error", "Please select a color!", "Ok");
+                return;
+            }
             IsBusy = true;
             await SaveAccount();
            
-            await _navigationService.PopAsync(); //Navigheaza spre pagina anterioara
+            await _navigationService.PopAsync(); 
             IsBusy = false;
         }
 

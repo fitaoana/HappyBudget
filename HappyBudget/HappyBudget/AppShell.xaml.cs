@@ -2,6 +2,7 @@
 using HappyBudget.Views;
 using HappyBudget.Views.Accounts;
 using HappyBudget.Views.Categories;
+using HappyBudget.Views.Statistics;
 using HappyBudget.Views.Transactions;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,8 @@ namespace HappyBudget
             Routing.RegisterRoute("SelectImageViewModel", typeof(SelectImagePopupPage));
             Routing.RegisterRoute("SelectCategoryViewModel", typeof(SelectIncomeCategoryPopupPage));
             //Routing.RegisterRoute("SelectColorViewModel", typeof(SelectCategoryColorPopupPage));
+
+            Routing.RegisterRoute("SelectFilterViewModel", typeof(SelectFilterPopupPage));
         }
 
         

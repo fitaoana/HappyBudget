@@ -52,9 +52,7 @@ namespace HappyBudget.ViewModels.Categories
 
         public override async Task InitializeAsync(object parameter)
         {
-          
             await GetCategories();
-            
         }
 
         public ICommand NewCategoryCommand { get => new Command(async () => await NewCategory()); }

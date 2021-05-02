@@ -14,8 +14,9 @@
                 <On Platform="Android" Value="fa-solid-900.ttf#Font Awesome 5 Free"/>
             </OnPlatform>
 
-            <Color x:Key="PrimaryColor">#418C71</Color> 
-            <Color x:Key="SecondaryColor">#EDE4D2</Color>
+            <Color x:Key="PrimaryColor">#418C71</Color>
+            <Color x:Key="SecondaryColor">#F5F5F5</Color>
+            <Color x:Key="ThirdColor">#FFFFFF</Color>
             <Color x:Key="AccentColor">#C6DCD4</Color>
 
             <Style x:Key="AppTheme" TargetType="Element">
@@ -30,6 +31,10 @@
         
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource AppTheme}"/>
 
+            <Style TargetType="Page" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="{StaticResource SecondaryColor}"/>
+            </Style>
+            
             <Style TargetType="Layout" ApplyToDerivedTypes="True" Class="FlyoutItemLayoutStyle">
                 <Setter Property="HeightRequest" Value="44"/>
                 <Setter Property="VisualStateManager.VisualStateGroups">
